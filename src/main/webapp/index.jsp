@@ -1,5 +1,5 @@
 <%@page import="edu.isen.jee.memory.Model"%>
-<%@ page import = "edu.isen.jee.memory.Servlet" %>
+<%@page import = "edu.isen.jee.memory.Servlet" %>
 <html>
 <body>
 
