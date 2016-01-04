@@ -1,4 +1,4 @@
-<%@page import="edu.isen.jee.memory.Model"%>
+<%@page import="edu.isen.jee.memory.MemoryGame"%>
 <%@page import = "edu.isen.jee.memory.Servlet" %>
 <html>
 <body>
