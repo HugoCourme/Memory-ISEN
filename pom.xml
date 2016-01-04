@@ -14,7 +14,7 @@
 
 
   <build>
-    <finalName>guess</finalName>
+    <finalName>memory</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -54,7 +54,7 @@
         <configuration>
           <scanIntervalSeconds>3</scanIntervalSeconds>
           <webApp>
-            <contextPath>/guess</contextPath>
+            <contextPath>/memory</contextPath>
           </webApp>
         </configuration>
       </plugin>
