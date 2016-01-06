@@ -11,6 +11,10 @@ public interface MemoryGame {
     
     Card getCard(int cellNumber);
     
+    int[] getPlayersScore();
+    
+    void setPlayerScore(int player, int score);
+    
     boolean canReplay();
     
     boolean isFinish();

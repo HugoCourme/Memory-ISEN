@@ -19,24 +19,66 @@ public class MemoryGameTest {
     }
 
     @Test
-    public void twoDifferentCardReturnedDontStayThatWay() throws Exception {
+    public void aPlayerCanScore() throws Exception {
+    	int player= RandomUtils.nextInt(2);
+    	assertThat(game.getPlayersScore()[player]).isEqualTo(0);
+    	assertThat(game.getPlayersScore()[player==0?1:0]).isEqualTo(0);
 
+    	int score = RandomUtils.nextInt(20);
+    	game.setPlayerScore(player, score);
+    	assertThat(game.getPlayersScore()[player]).isEqualTo(score);
+    	assertThat(game.getPlayersScore()[player==0?1:0]).isEqualTo(0);
     }
     
     @Test
-    public void twoSameCardStayReturned() throws Exception {
-
+    public void theGameCanBeFinish() throws Exception {
+    	for (int i = 0; i < game.getNumberOfCard(); i++) {
+        	assertThat(game.isFinish()).isEqualTo(false);
+			game.returnCard(i);
+		}
+    	assertThat(game.isFinish()).isEqualTo(true);
     }
     
     @Test
-    public void aPlayerCantReturnOnlyTwoCardInARow() throws Exception {
-
-    }    
+    public void itCanReplay() throws Exception {
+    	int cardNumber = RandomUtils.nextInt(game.getNumberOfCard());
+    	game.returnCard(cardNumber);
+    	assertThat(game.canReplay()).isEqualTo(false);
+    	
+    	for (int i = 0; i < game.getNumberOfCard(); i++) {
+			if(i==cardNumber){
+				continue;
+			}
+			if(game.getCard(cardNumber).frontColorIndex==game.getCard(i).frontColorIndex){
+				game.returnCard(i);
+			}
+		}
+    	assertThat(game.canReplay()).isEqualTo(true);
+    }
+    
+    @Test
+    public void itCantReplayIfTwoCardAreDifferent() throws Exception {
+    	int cardNumber = RandomUtils.nextInt(game.getNumberOfCard());
+    	game.returnCard(cardNumber);
+    	assertThat(game.canReplay()).isEqualTo(false);
+    	
+    	for (int i = 0; i < game.getNumberOfCard(); i++) {
+			if(i==cardNumber){
+				continue;
+			}
+			if(game.getCard(cardNumber).frontColorIndex!=game.getCard(i).frontColorIndex){
+				game.returnCard(i);
+			}
+		}
+    	assertThat(game.canReplay()).isEqualTo(false);
+    }
     
     @Test
     public void aCardCanBeReturn() throws Exception {
     	int cellNumber = RandomUtils.nextInt(game.getNumberOfCard());
     	game.returnCard(cellNumber);
     	assertThat(game.getCard(cellNumber).side).isEqualTo(Side.RECTO);
+    	game.returnCard(cellNumber);
+    	assertThat(game.getCard(cellNumber).side).isEqualTo(Side.VERSO);
     }
 }

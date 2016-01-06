@@ -2,19 +2,15 @@ package edu.isen.jee.memory;
 
 public class Card {
 	
-	public enum CardColor {
-		BLACK,RED,YELLOW,BLUE,GREEN
-	}
-	
 	public enum Side {
 		RECTO,VERSO
 	}
 	
-	public CardColor frontColor;
+	public int frontColorIndex;
 	public Side side;
 	
-	public Card(CardColor frontColor){
-		this.frontColor = frontColor;
+	public Card(int frontColorIndex){
+		this.frontColorIndex = frontColorIndex;
 		this.side = Side.VERSO;
 	}
 }

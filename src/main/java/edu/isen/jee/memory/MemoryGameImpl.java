@@ -1,13 +1,8 @@
 package edu.isen.jee.memory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
-
-
-import edu.isen.jee.memory.Card.CardColor;
 import edu.isen.jee.memory.Card.Side;
 
 
@@ -16,6 +11,8 @@ public class MemoryGameImpl implements MemoryGame {
 	private static final int CARD_NUMBER= 10;
     public static final String OUTSIDE_OF_BOARD_ERROR = "It is not possible to play outside of the board";
     
+    private int[] playersScore = {0,0};
+    
 	List<Card> board = new ArrayList<>(CARD_NUMBER);
 	
 	public MemoryGameImpl() {
@@ -23,10 +20,9 @@ public class MemoryGameImpl implements MemoryGame {
 	}
 
     private void initBoard() {
-    	List<CardColor> cardColorList = new ArrayList<>(Arrays.asList(CardColor.values()));
     	for (int i = 0; i < CARD_NUMBER; i++) {
-			board.add(new Card(cardColorList.get((int)(i/2))));
-		}
+    		board.add(new Card((int)(i/2)));
+    		}
 		Collections.shuffle(board);
     }
 	
@@ -35,23 +31,20 @@ public class MemoryGameImpl implements MemoryGame {
 		if(cellNumber>CARD_NUMBER){
 			throw new GameException(OUTSIDE_OF_BOARD_ERROR);
 		}
-		board.get(cellNumber).side=Side.RECTO;
+		
+		Side currentSide = board.get(cellNumber).side;
+		board.get(cellNumber).side = currentSide==Side.RECTO? Side.VERSO:Side.RECTO;
 	}
 
 	@Override
-	public boolean canReplay() {
-		Stream<Card> stream = board.stream().filter(card -> card.side==Side.RECTO);
-		return stream.allMatch(card->(stream.filter(c->c.frontColor==card.frontColor).count()==2)?true:false)?true:false;
-		
-		/*
+	public boolean canReplay() {	
 		return board.stream().filter(card -> card.side==Side.RECTO).allMatch(card->
-			(board.stream().filter(c-> c.side==Side.RECTO).filter(c->c.frontColor==card.frontColor).count()==2)?true:false)?true:false;
-		 */
+			(board.stream().filter(c-> c.side==Side.RECTO).filter(c->c.frontColorIndex==card.frontColorIndex).count()==2));
 	}
+	
 	@Override
 	public boolean isFinish(){
-		return board.stream().filter(card -> card.side==Side.RECTO).count()==CARD_NUMBER?true:false;
-		
+		return board.stream().filter(card -> card.side==Side.RECTO).count()==CARD_NUMBER;
 	}
 
 	@Override
@@ -62,5 +55,15 @@ public class MemoryGameImpl implements MemoryGame {
 	@Override
 	public int getNumberOfCard() {
 		return CARD_NUMBER;
+	}
+
+	@Override
+	public int[] getPlayersScore() {
+		return playersScore;
+	}
+
+	@Override
+	public void setPlayerScore(int player, int score) {
+		this.playersScore[player]=score;
 	}
 }
