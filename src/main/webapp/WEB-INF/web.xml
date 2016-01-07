@@ -3,7 +3,7 @@
           http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
   metadata-complete="false"
   version="3.0">
-  <display-name>Guess a number</display-name>
+  <display-name>Memory</display-name>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

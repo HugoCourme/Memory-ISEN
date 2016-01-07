@@ -1,18 +1,9 @@
-<%@page import="edu.isen.jee.memory.MemoryGame"%>
-<%@page import = "edu.isen.jee.memory.Servlet" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
+<head>
+<title>Memory Hugo-Louis</title>
+</head>
 <body>
-
-<%
-  	String number = "sd";
-%>
-
-<h1>Guess a number : <%= number %></h1>
-<form method="post" actions="/memory">
-Your choice : <input name="number" />
-<input type="submit"/>
-</form>
-
+<c:redirect url="/g/" />
 </body>
-
 </html>
