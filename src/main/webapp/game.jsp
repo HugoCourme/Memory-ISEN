@@ -30,22 +30,22 @@
         <div class="ui two column middle aligned very relaxed grid">
             <div class="column">
                 <div id="board" class="ui four column padded grid">
-                        <a href="?playCard=1" class="column"><div class="ui icon massive red button">1</div></a>
-                        <a href="?playCard=2" class="column"><div class="ui icon massive orange button">2</div></a>
-                        <a href="?playCard=3" class="column"><div class="ui icon massive purple button">3</div></a>
-                        <a href="?playCard=4" class="column"><div class="ui icon massive blue button">4</div></a>
-                        <a href="?playCard=5" class="column"><div class="ui icon massive teal button">5</div></a>
-                        <a href="?playCard=6" class="column"><div class="ui icon massive pink button">6</div></a>
-                        <a href="?playCard=7" class="column"><div class="ui icon massive yellow button">7</div></a>
-                        <a href="?playCard=8" class="column"><div class="ui icon massive green button">8</div></a>
+                        <div class="column"><a href="?playCard=1" class="ui icon massive red button">${game.token}</a></div>
+                        <div class="column"><a href="?playCard=2" class="ui icon massive orange button">2</a></div>
+                        <div class="column"><a href="?playCard=3" class="ui icon massive purple button">3</a></div>
+                        <div class="column"><a href="?playCard=4" class="ui icon massive blue button">4</a></div>
+                        <div class="column"><a href="?playCard=5" class="ui icon massive teal button">5</a></div>
+                        <div class="column"><a href="?playCard=6" class="ui icon massive pink button">6</a></div>
+                        <div class="column disabled"><a href="?playCard=7" class="ui icon massive yellow button">7</a></div>
+                        <div class="column"><a href="?playCard=8" class="ui icon massive green button">8</a></div>
                 </div>    
             </div>
 	        <div class="column">
 	            <div class="">
 	            <div class="header"><h1>Score</h1></div>
-	                <div class="ui horizontal  statistics">
+	                <div class="ui horizontal statistics">
 	                    <div class="statistic">
-	                        <div class="value">22</div>
+	                        <div class="value">${game.playersScore}</div>
 	                        <div class="label">Player 1</div>
 	                    </div>
 	                    <div class="statistic">
@@ -60,8 +60,6 @@
     <div class="container">
         <a href="?reset" class="ui red button" id="reset">Reset game</a>
     </div>
-
-
 
 </body>
 

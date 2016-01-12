@@ -1,15 +1,16 @@
 package edu.isen.jee.memory;
 
+import java.util.List;
 
-public class MemoryAdapter implements MemoryGame{
-	
+public class MemoryAdapter implements MemoryGame {
+
 	private Game game;
-	
+
 	private MemoryGame coreGame;
-	
+
 	private MemoryDAO dao;
-	
-	public MemoryAdapter(MemoryDAO dao, Game game){
+
+	public MemoryAdapter(MemoryDAO dao, Game game) {
 		this.game = game;
 		this.dao = dao;
 		this.coreGame = new MemoryGameImpl();
@@ -19,13 +20,13 @@ public class MemoryAdapter implements MemoryGame{
 	public void returnCard(int cellNumber) throws GameException {
 		coreGame.returnCard(cellNumber);
 		switchTurn();
-		
+
 		dao.save(game);
 	}
-	
-	private void switchTurn(){
+
+	private void switchTurn() {
 		if (!coreGame.canReplay())
-			game.setCurrentPlayer(game.getCurrentPlayer()==0?1:0);
+			game.setCurrentPlayer(game.getCurrentPlayer() == 0 ? 1 : 0);
 	}
 
 	@Override
@@ -56,6 +57,15 @@ public class MemoryAdapter implements MemoryGame{
 	@Override
 	public void setPlayerScore(int player, int score) {
 		coreGame.setPlayerScore(player, score);
+	}
+
+	public String getToken() {
+		return game.getToken();
+	}
+
+	public List<Card> getBoard() {
+		// TODO Auto-generated method stub
+		return coreGame.getBoard();
 	}
 
 }

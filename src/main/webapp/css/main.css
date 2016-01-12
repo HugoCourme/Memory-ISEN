@@ -33,3 +33,12 @@
 #board {
     width: 400px;
 }
+
+.disabled {
+   pointer-events: none;
+   cursor: default;
+}
+
+#board>div>a{
+  transform: scale(1.2);
+}

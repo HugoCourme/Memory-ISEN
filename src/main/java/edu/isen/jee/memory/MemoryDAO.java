@@ -14,45 +14,46 @@ import org.apache.commons.lang.RandomStringUtils;
 public class MemoryDAO {
 
 	@Inject
-    EntityManager em;
+	EntityManager em;
 
-    @Inject
-    UserTransaction ut;
-    
-    public MemoryAdapter createNewGame(){
-    	Game game = new Game();
-        game.setToken(RandomStringUtils.randomAlphanumeric(10).toLowerCase());
-        try {
-            ut.begin();
-            em.persist(game);
-            ut.commit();
+	@Inject
+	UserTransaction ut;
 
-        } catch (NotSupportedException | SystemException | SecurityException
-                | IllegalStateException | RollbackException
-                | HeuristicMixedException | HeuristicRollbackException e) {
-            return null;
-        }
-        return new MemoryAdapter(this, game);
-    }
-    
-    public MemoryAdapter loadFromToken(String token) {
-        Game game = (Game) em
-                .createQuery("SELECT g FROM Game g WHERE g.token = :token")
-                .setParameter("token", token).getSingleResult();
+	/*
+	 * public MemoryDAO(){ System.out.println("DAO creation"); }
+	 */
 
-        return new MemoryAdapter(this, game);
-    }
+	public MemoryAdapter createNewGame() {
+		Game game = new Game();
+		game.setToken(RandomStringUtils.randomAlphanumeric(10).toLowerCase());
+		try {
+			ut.begin();
+			em.persist(game);
+			ut.commit();
 
-    public void save(Game game) {
-        try {
-            ut.begin();
-            em.merge(game);
-            ut.commit();
-        } catch (SecurityException | IllegalStateException | RollbackException
-                | HeuristicMixedException | HeuristicRollbackException
-                | SystemException | NotSupportedException e) {
-            e.printStackTrace();
-        }
+		} catch (NotSupportedException | SystemException | SecurityException | IllegalStateException | RollbackException
+				| HeuristicMixedException | HeuristicRollbackException e) {
+			return null;
+		}
+		return new MemoryAdapter(this, game);
+	}
 
-    }
+	public MemoryAdapter loadFromToken(String token) {
+		Game game = (Game) em.createQuery("SELECT g FROM Game g WHERE g.token = :token").setParameter("token", token)
+				.getSingleResult();
+
+		return new MemoryAdapter(this, game);
+	}
+
+	public void save(Game game) {
+		try {
+			ut.begin();
+			em.merge(game);
+			ut.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+
+	}
 }
