@@ -3,10 +3,14 @@ package edu.isen.jee.memory;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 
 @Entity(name = "Game")
 public class Game {
@@ -17,9 +21,13 @@ public class Game {
 
 	private String token;
 
-	//private List<Card> board = new ArrayList<>();
+	@OneToMany(mappedBy="game", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OrderColumn(name="index")
+	private List<CardEntity> board = new ArrayList<>();
 
 	private int currentPlayer = 0;
+	
+	private ArrayList<Integer> score = new ArrayList<>();
 
 	public Game() {
 
@@ -37,9 +45,9 @@ public class Game {
 		return new ArrayList<Card>();
 	}
 
-//	public void setListOfCard(List<Card> board) {
-//		this.board = board;
-//	}
+	public void setListOfCard(List<CardEntity> board) {
+		this.board = board;
+	}
 
 	public void setCurrentPlayer(int player) {
 		this.currentPlayer = player;
