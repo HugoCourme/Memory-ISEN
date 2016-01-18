@@ -17,7 +17,7 @@ public class Game {
 
 	private String token;
 
-	private List<Card> board = new ArrayList<>();
+	//private List<Card> board = new ArrayList<>();
 
 	private int currentPlayer = 0;
 
@@ -34,12 +34,12 @@ public class Game {
 	}
 
 	public List<Card> getListOfCard() {
-		return board;
+		return new ArrayList<Card>();
 	}
 
-	public void setListOfCard(List<Card> board) {
-		this.board = board;
-	}
+//	public void setListOfCard(List<Card> board) {
+//		this.board = board;
+//	}
 
 	public void setCurrentPlayer(int player) {
 		this.currentPlayer = player;

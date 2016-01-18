@@ -1,5 +1,7 @@
 package edu.isen.jee.memory;
 
+import java.io.Serializable;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.HeuristicMixedException;
@@ -11,7 +13,7 @@ import javax.transaction.UserTransaction;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-public class MemoryDAO {
+public class MemoryDAO implements Serializable{
 
 	@Inject
 	EntityManager em;
