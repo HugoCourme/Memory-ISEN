@@ -30,14 +30,24 @@
         <div class="ui two column middle aligned very relaxed grid">
             <div class="column">
                 <div id="board" class="ui four column padded grid">
-                        <div class="column"><a href="?playCard=1" class="ui icon massive red button">${game.token}</a></div>
-                        <div class="column"><a href="?playCard=2" class="ui icon massive orange button">2</a></div>
-                        <div class="column"><a href="?playCard=3" class="ui icon massive purple button">3</a></div>
-                        <div class="column"><a href="?playCard=4" class="ui icon massive blue button">4</a></div>
-                        <div class="column"><a href="?playCard=5" class="ui icon massive teal button">5</a></div>
-                        <div class="column"><a href="?playCard=6" class="ui icon massive pink button">6</a></div>
-                        <div class="column disabled"><a href="?playCard=7" class="ui icon massive yellow button">7</a></div>
-                        <div class="column"><a href="?playCard=8" class="ui icon massive green button">8</a></div>
+<%--                 <c:forEach items ="${game.cards}" var="card"> --%>
+<%--                 	<c:choose> --%>
+<%--                 		<c:when test="${card.side==RECTO}"> --%>
+<%--                 			<div class="column"><a href="?playCard=${card.index}" class="ui icon massive button"></a></div> --%>
+<%--                 		</c:when> --%>
+<%--                 		<c:otherwise> --%>
+<%--                 			<div class="column disabled"><a href="" class="ui icon massive ${card.cssColor} button"></a></div> --%>
+<%--                 		</c:otherwise> --%>
+<%--                 	</c:choose> --%>
+<%--                 </c:forEach> --%>
+                        <div class="column"><a href="?playCard=1" class="ui icon massive red button"></a></div>
+                        <div class="column"><a href="?playCard=2" class="ui icon massive orange button"></a></div>
+                        <div class="column"><a href="?playCard=3" class="ui icon massive purple button"></a></div>
+                        <div class="column"><a href="?playCard=4" class="ui icon massive blue button"></a></div>
+                        <div class="column"><a href="?playCard=5" class="ui icon massive teal button"></a></div>
+                        <div class="column"><a href="?playCard=6" class="ui icon massive pink button"></a></div>
+                        <div class="column disabled"><a href="?playCard=7" class="ui icon massive yellow button"></a></div>
+                        <div class="column"><a href="?playCard=8" class="ui icon massive green button"></a></div>
                 </div>    
             </div>
 	        <div class="column">
@@ -45,11 +55,11 @@
 	            <div class="header"><h1>Score</h1></div>
 	                <div class="ui horizontal statistics">
 	                    <div class="statistic">
-	                        <div class="value">${game.playersScore}</div>
+	                        <div class="value">${game.playersScore[0]}</div>
 	                        <div class="label">Player 1</div>
 	                    </div>
 	                    <div class="statistic">
-	                        <div class="value">28</div>
+	                        <div class="value">${game.playersScore[1]}</div>
 	                        <div class="label">Player 2</div>
 	                    </div>
 	                </div>

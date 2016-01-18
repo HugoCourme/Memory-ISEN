@@ -7,7 +7,7 @@ import edu.isen.jee.memory.Card.Side;
 
 public class MemoryGameImpl implements MemoryGame {
 
-	private static final int CARD_NUMBER = 10;
+	private static final int CARD_NUMBER = 16;
 	public static final String OUTSIDE_OF_BOARD_ERROR = "It is not possible to play outside of the board";
 
 	private int[] playersScore = { 0, 0 };
