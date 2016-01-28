@@ -13,7 +13,7 @@ import javax.transaction.UserTransaction;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-public class MemoryDAO implements Serializable{
+public class MemoryDAO implements Serializable {
 
 	@Inject
 	EntityManager em;

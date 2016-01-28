@@ -1,7 +1,7 @@
 package edu.isen.jee.memory;
 
 public class Card {
-
+	
 	public enum Side {
 		RECTO, VERSO
 	}

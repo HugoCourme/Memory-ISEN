@@ -33,7 +33,7 @@ public class MemoryGameTest {
     @Test
     public void theGameCanBeFinish() throws Exception {
     	for (int i = 0; i < game.getNumberOfCard(); i++) {
-//        	assertThat(game.isFinish()).isEqualTo(false);
+        	assertThat(game.isFinish()).isEqualTo(false);
 			game.returnCard(i);
 		}
     	assertThat(game.isFinish()).isEqualTo(true);
@@ -43,7 +43,7 @@ public class MemoryGameTest {
     public void itCanReplay() throws Exception {
     	int cardNumber = RandomUtils.nextInt(game.getNumberOfCard());
     	game.returnCard(cardNumber);
-//    	assertThat(game.canReplay()).isEqualTo(false);
+    	assertThat(game.canReplay()).isEqualTo(true);
     	
     	for (int i = 0; i < game.getNumberOfCard(); i++) {
 			if(i==cardNumber){
@@ -60,7 +60,7 @@ public class MemoryGameTest {
     public void itCantReplayIfTwoCardAreDifferent() throws Exception {
     	int cardNumber = RandomUtils.nextInt(game.getNumberOfCard());
     	game.returnCard(cardNumber);
-//    	assertThat(game.canReplay()).isEqualTo(false);
+    	assertThat(game.canReplay()).isEqualTo(true);
     	
     	for (int i = 0; i < game.getNumberOfCard(); i++) {
 			if(i==cardNumber){
@@ -68,9 +68,10 @@ public class MemoryGameTest {
 			}
 			if(game.getCard(cardNumber).frontColorIndex!=game.getCard(i).frontColorIndex){
 				game.returnCard(i);
+				break;
 			}
 		}
-//    	assertThat(game.canReplay()).isEqualTo(false);
+    	assertThat(game.canReplay()).isEqualTo(false);
     }
     
     @Test

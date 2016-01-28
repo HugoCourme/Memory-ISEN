@@ -26,13 +26,6 @@ public class Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String token = getTokenFromRequest(req);
-		/*
-		 * if(game==null){ System.out.println("game == null"); game= new
-		 * MemoryBean(); if(game!=null){ System.out.println("game != null");
-		 * if(game.dao==null){ System.out.println("dao == null");
-		 * 
-		 * } } }
-		 */
 
 		if (StringUtils.isEmpty(token) || req.getParameter("reset") != null) {
 			game.createNewGame();
@@ -40,7 +33,7 @@ public class Servlet extends HttpServlet {
 			return;
 		}
 		game.loadFromToken(token);
-
+		
 		String playCard = req.getParameter("playCard");
 		if (playCard != null) {
 			game.play(Integer.parseInt(playCard));

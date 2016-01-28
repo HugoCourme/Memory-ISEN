@@ -14,18 +14,33 @@ public class MemoryAdapter implements MemoryGame {
 		this.game = game;
 		this.dao = dao;
 		this.coreGame = new MemoryGameImpl();
+
+		if (game.getListOfCard().isEmpty()) {
+			for (Card card : coreGame.getBoard()) {
+				game.getListOfCard().add(new CardEntity(game, card.frontColorIndex, card.side));
+			}
+			game.setScore(coreGame.getPlayersScore());
+			return;
+		}
+
+		int index = 0;
+		for (Card card : coreGame.getBoard()) {
+			card.side = game.getListOfCard().get(index).getSide();
+			card.frontColorIndex = game.getListOfCard().get(index++).getFrontColorIndex();
+		}
 	}
 
 	@Override
 	public void returnCard(int cellNumber) throws GameException {
 		coreGame.returnCard(cellNumber);
+		game.getListOfCard().get(cellNumber).setSide(coreGame.getCard(cellNumber).side);
 		switchTurn();
 
 		dao.save(game);
 	}
 
 	private void switchTurn() {
-		if (!coreGame.canReplay())
+		if (!canReplay())
 			game.setCurrentPlayer(game.getCurrentPlayer() == 0 ? 1 : 0);
 	}
 
@@ -54,6 +69,10 @@ public class MemoryAdapter implements MemoryGame {
 		return coreGame.getPlayersScore();
 	}
 
+	public int getCurrentPlayer() {
+		return game.getCurrentPlayer();
+	}
+
 	@Override
 	public void setPlayerScore(int player, int score) {
 		coreGame.setPlayerScore(player, score);
@@ -64,7 +83,6 @@ public class MemoryAdapter implements MemoryGame {
 	}
 
 	public List<Card> getBoard() {
-		// TODO Auto-generated method stub
 		return coreGame.getBoard();
 	}
 

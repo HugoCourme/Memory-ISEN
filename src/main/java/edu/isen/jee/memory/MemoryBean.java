@@ -1,6 +1,7 @@
 package edu.isen.jee.memory;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -18,20 +19,24 @@ public class MemoryBean implements Serializable {
 	@Inject
 	MemoryDAO dao;
 
-	/*
-	 * public MemoryBean() { System.out.println("MemoryBean creation");
-	 * if(dao==null){ System.out.println("dao == null"); dao = new MemoryDAO();
-	 * } }
-	 */
 
-	public List<Card> getCards() {
-		return game.getBoard();
+	public List<CardColorWrapper> getCards() {
+		List<CardColorWrapper> board = new ArrayList<>();
+		int index = 0;
+		for (Card card: game.getBoard()) {
+			board.add(new CardColorWrapper(index++, card));
+		}
+		return board;
 	}
 
 	public void play(int cellNumber) {
 		game.returnCard(cellNumber);
 	}
 
+	public boolean canReplay(){
+		return game.canReplay();
+	}
+	
 	public int[] getPlayersScore() {
 		int[] score = new int[]{10,20};
 		return score;
@@ -49,6 +54,10 @@ public class MemoryBean implements Serializable {
 		game = dao.createNewGame();
 	}
 
+	public int getCurrentPlayer() {
+		return game.getCurrentPlayer();
+	}
+	
 	public void loadFromToken(String token) {
 		game = dao.loadFromToken(token);
 	}

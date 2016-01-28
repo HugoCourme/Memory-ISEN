@@ -8,16 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import edu.isen.jee.memory.Card.Side;
+
 @Entity
 public class CardEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	public enum Side {
-		RECTO, VERSO
-	}
 
 	@ManyToOne
 	Game game;
@@ -25,28 +23,17 @@ public class CardEntity {
 	@Column(name="frontColorIndex")
 	private int frontColorIndex;
 	
-	@Column(name="side")
+	@Column(name="Side")
 	private Side side;
-	
-	@Column(name="index")
-	private int index;
-	
-	public int getIndex() {
-		return index;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
-	}
 
 	public CardEntity() {
 		
 	}
 
-	public CardEntity(Game game, int frontColorIndex) {
+	public CardEntity(Game game, int frontColorIndex, Side side) {
 		this.game = game;
 		this.frontColorIndex = frontColorIndex;
-		this.side = Side.VERSO;
+		this.side = side;
 	}
 
 	public int getFrontColorIndex() {

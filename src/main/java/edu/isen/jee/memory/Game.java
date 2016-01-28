@@ -27,7 +27,7 @@ public class Game {
 
 	private int currentPlayer = 0;
 	
-	private ArrayList<Integer> score = new ArrayList<>();
+	private int[] score = { 0, 0 };
 
 	public Game() {
 
@@ -41,8 +41,8 @@ public class Game {
 		this.token = token;
 	}
 
-	public List<Card> getListOfCard() {
-		return new ArrayList<Card>();
+	public List<CardEntity> getListOfCard() {
+		return board;
 	}
 
 	public void setListOfCard(List<CardEntity> board) {
@@ -55,6 +55,14 @@ public class Game {
 
 	public int getCurrentPlayer() {
 		return this.currentPlayer;
+	}
+	
+	public void setScore(int[] score){
+		this.score = score;
+	}
+	
+	public int[] getScore(){
+		return score;
 	}
 
 }
