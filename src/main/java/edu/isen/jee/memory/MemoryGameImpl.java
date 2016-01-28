@@ -67,6 +67,7 @@ public class MemoryGameImpl implements MemoryGame {
 	@Override
 	public void setPlayerScore(int player, int score) {
 		this.playersScore[player] = score;
+		System.out.println("score : ["+playersScore[0]+","+playersScore[0]+"]");
 	}
 
 	@Override

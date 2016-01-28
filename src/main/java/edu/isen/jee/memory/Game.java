@@ -21,16 +21,17 @@ public class Game {
 
 	private String token;
 
-	@OneToMany(mappedBy="game", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@OrderColumn(name="index")
+	@OneToMany(mappedBy = "game", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OrderColumn(name = "index")
 	private List<CardEntity> board = new ArrayList<>();
 
+	private List<Integer> cardBuffer = new ArrayList<>(2);
+
 	private int currentPlayer = 0;
-	
+
 	private int[] score = { 0, 0 };
 
 	public Game() {
-
 	}
 
 	public String getToken() {
@@ -56,13 +57,32 @@ public class Game {
 	public int getCurrentPlayer() {
 		return this.currentPlayer;
 	}
-	
-	public void setScore(int[] score){
+
+	public void setScore(int[] score) {
 		this.score = score;
 	}
-	
-	public int[] getScore(){
+
+	public int[] getScore() {
 		return score;
+	}
+
+	public List<Integer> getCardBuffer() {
+		return cardBuffer;
+	}
+
+	public void setCardBuffer(List<Integer> buffer) {
+		this.cardBuffer = buffer;
+	}
+	
+	public void addToCardBuffer(int cardIndex){
+		clearCardBuffer();
+		cardBuffer.add(cardIndex);
+	}
+	
+	public void clearCardBuffer() {
+		if (cardBuffer.size() >= 2) {
+			cardBuffer.clear();
+		}
 	}
 
 }

@@ -21,10 +21,6 @@ public class MemoryDAO implements Serializable {
 	@Inject
 	UserTransaction ut;
 
-	/*
-	 * public MemoryDAO(){ System.out.println("DAO creation"); }
-	 */
-
 	public MemoryAdapter createNewGame() {
 		Game game = new Game();
 		game.setToken(RandomStringUtils.randomAlphanumeric(10).toLowerCase());

@@ -38,8 +38,7 @@ public class MemoryBean implements Serializable {
 	}
 	
 	public int[] getPlayersScore() {
-		int[] score = new int[]{10,20};
-		return score;
+		return game.getPlayersScore();
 	}
 
 	public String getToken() {
