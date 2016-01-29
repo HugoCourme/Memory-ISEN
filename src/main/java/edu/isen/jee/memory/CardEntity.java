@@ -27,7 +27,6 @@ public class CardEntity {
 	private Side side;
 
 	public CardEntity() {
-		
 	}
 
 	public CardEntity(Game game, int frontColorIndex, Side side) {

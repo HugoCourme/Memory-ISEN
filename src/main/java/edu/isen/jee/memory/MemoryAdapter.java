@@ -19,7 +19,7 @@ public class MemoryAdapter implements MemoryGame {
 			for (Card card : coreGame.getBoard()) {
 				game.getListOfCard().add(new CardEntity(game, card.frontColorIndex, card.side));
 			}
-			game.setScore(coreGame.getPlayersScore());
+			game.setScore(getPlayersScore());
 			return;
 		}
 
@@ -28,20 +28,38 @@ public class MemoryAdapter implements MemoryGame {
 			card.side = game.getListOfCard().get(index).getSide();
 			card.frontColorIndex = game.getListOfCard().get(index++).getFrontColorIndex();
 		}
+		coreGame.setPlayerScore(0, game.getScore()[0]);
+		coreGame.setPlayerScore(1, game.getScore()[1]);
 	}
 
 	@Override
 	public void returnCard(int cellNumber) throws GameException {
-		coreGame.returnCard(cellNumber);
-		game.getListOfCard().get(cellNumber).setSide(coreGame.getCard(cellNumber).side);
-		switchTurn();
-
+		if (!canReplay()) {
+			returnLastCard();
+			switchTurn();
+		} else {
+			coreGame.returnCard(cellNumber);
+			game.getListOfCard().get(cellNumber).setSide(coreGame.getCard(cellNumber).side);
+			game.addToCardBuffer(cellNumber);
+			score(getCurrentPlayer());
+		}
 		dao.save(game);
 	}
 
+	private void score(int player) {
+		System.out.print("player "+player);
+		setPlayerScore(player, getPlayersScore()[player] + 2);
+	}
+
+	private void returnLastCard() {
+		for (int cardIndex : game.getCardBuffer()) {
+			coreGame.returnCard(cardIndex);
+			game.getListOfCard().get(cardIndex).setSide(coreGame.getCard(cardIndex).side);
+		}
+	}
+
 	private void switchTurn() {
-		if (!canReplay())
-			game.setCurrentPlayer(game.getCurrentPlayer() == 0 ? 1 : 0);
+		game.setCurrentPlayer(game.getCurrentPlayer() == 0 ? 1 : 0);
 	}
 
 	@Override
@@ -75,7 +93,9 @@ public class MemoryAdapter implements MemoryGame {
 
 	@Override
 	public void setPlayerScore(int player, int score) {
+		System.out.println(" set score : "+score);
 		coreGame.setPlayerScore(player, score);
+		game.setScore(getPlayersScore());
 	}
 
 	public String getToken() {
