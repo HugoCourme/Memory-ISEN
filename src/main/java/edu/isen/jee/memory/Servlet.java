@@ -26,7 +26,7 @@ public class Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String token = getTokenFromRequest(req);
-
+		
 		if (StringUtils.isEmpty(token) || req.getParameter("reset") != null) {
 			game.createNewGame();
 			redirectToGameRoot(req, resp);
@@ -39,6 +39,7 @@ public class Servlet extends HttpServlet {
 			game.play(Integer.parseInt(playCard));
 			redirectToGameRoot(req, resp);
 		} else {
+			resp.setIntHeader("Refresh", 5);
 			req.getRequestDispatcher("/game.jsp").include(req, resp);
 		}
 	}

@@ -51,7 +51,7 @@
                 </div>    
             </div>
 	        <div class="column">
-	            <div class="">
+	            <div id="score">
 	            <div class="header"><h1>Score</h1></div>
 	                <div class="ui horizontal statistics">
 	                    <div id =${game.currentPlayer==0?"focus":"z"} class="statistic">
