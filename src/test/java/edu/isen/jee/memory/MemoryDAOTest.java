@@ -36,5 +36,49 @@ public class MemoryDAOTest {
 	     assertThat(game).isNotNull();
 
 	 }
+	 
+	 @Test
+	 public void itCanPlayWithJPAGame() throws Exception {
+		 MemoryAdapter game = dao.createNewGame();
+		 game.returnCard(0);
+		 if (game.getCard(0).frontColorIndex != game.getCard(1).frontColorIndex) {
+			 game.returnCard(1);
+			 assertThat(game.getCard(0).side).isEqualTo(Card.Side.RECTO);
+			 assertThat(game.getCard(1).side).isEqualTo(Card.Side.RECTO);
+		}else {
+			game.returnCard(2);
+			 assertThat(game.getCard(0).side).isEqualTo(Card.Side.RECTO);
+			 assertThat(game.getCard(2).side).isEqualTo(Card.Side.RECTO);
+		}
+		 
+	 }
+	 
+	 @Test
+	    public void adapterManagesTurns() throws Exception {
+	        MemoryAdapter game = dao.createNewGame();
+	        assertThat(game.getCurrentPlayer()).isNotNull();
+	        assertThat(game.getCurrentPlayer()).isEqualTo(0);
+	        game.returnCard(0);
+			 if (game.getCard(0).frontColorIndex != game.getCard(1).frontColorIndex) {
+				 game.returnCard(1);
+			}else {
+				game.returnCard(2);
+			}
+			game.returnCard(3);
+	        game = dao.loadFromToken(game.getToken());
+	        assertThat(game.getCurrentPlayer()).isEqualTo(1);
+	        game.returnCard(0);
+			 if (game.getCard(0).frontColorIndex != game.getCard(1).frontColorIndex) {
+				 game.returnCard(1);
+			}else {
+				game.returnCard(2);
+			}
+			 game.returnCard(3);
+		     game = dao.loadFromToken(game.getToken());
+		     assertThat(game.getCurrentPlayer()).isEqualTo(0);
+
+	    }
+	 
+	 
 
 }
