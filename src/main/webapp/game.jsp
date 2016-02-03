@@ -29,7 +29,7 @@
     <div class="main container">
         <div class="ui two column middle aligned very relaxed grid">
             <div class="column">
-                <div id="board" class="ui four column padded grid">
+                <div id="board" class="ui four column padded grid ${game.ifReplay==true?"":"disabled" }">
                 <c:forEach items ="${game.cards}" var="card">
                 	<c:choose>
                 		<c:when test="${card.cssColor==null}">
@@ -40,14 +40,7 @@
                 		</c:otherwise>
                 	</c:choose>
                 </c:forEach>
-<!--                         <div class="column"><a href="?playCard=1" class="ui icon massive red button"></a></div> -->
-<!--                         <div class="column"><a href="?playCard=2" class="ui icon massive orange button"></a></div> -->
-<!--                         <div class="column"><a href="?playCard=3" class="ui icon massive purple button"></a></div> -->
-<!--                         <div class="column"><a href="?playCard=4" class="ui icon massive blue button"></a></div> -->
-<!--                         <div class="column"><a href="?playCard=5" class="ui icon massive teal button"></a></div> -->
-<!--                         <div class="column"><a href="?playCard=6" class="ui icon massive pink button"></a></div> -->
-<!--                         <div class="column disabled"><a href="?playCard=7" class="ui icon massive yellow button"></a></div> -->
-<!--                         <div class="column"><a href="?playCard=8" class="ui icon massive green button"></a></div> -->
+
                 </div>    
             </div>
 	        <div class="column">

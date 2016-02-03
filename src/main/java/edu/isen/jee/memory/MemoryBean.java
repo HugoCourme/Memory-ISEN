@@ -19,11 +19,10 @@ public class MemoryBean implements Serializable {
 	@Inject
 	MemoryDAO dao;
 
-
 	public List<CardColorWrapper> getCards() {
 		List<CardColorWrapper> board = new ArrayList<>();
 		int index = 0;
-		for (Card card: game.getBoard()) {
+		for (Card card : game.getBoard()) {
 			board.add(new CardColorWrapper(index++, card));
 		}
 		return board;
@@ -33,10 +32,14 @@ public class MemoryBean implements Serializable {
 		game.returnCard(cellNumber);
 	}
 
-	public boolean canReplay(){
+	public void returnLastCards() {
+		game.returnLastCards();
+	}
+
+	public boolean getIfReplay() {
 		return game.canReplay();
 	}
-	
+
 	public int[] getPlayersScore() {
 		return game.getPlayersScore();
 	}
@@ -56,7 +59,7 @@ public class MemoryBean implements Serializable {
 	public int getCurrentPlayer() {
 		return game.getCurrentPlayer();
 	}
-	
+
 	public void loadFromToken(String token) {
 		game = dao.loadFromToken(token);
 	}

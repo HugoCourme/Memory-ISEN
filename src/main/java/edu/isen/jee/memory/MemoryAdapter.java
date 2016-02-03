@@ -34,28 +34,25 @@ public class MemoryAdapter implements MemoryGame {
 
 	@Override
 	public void returnCard(int cellNumber) throws GameException {
-		if (!canReplay()) {
-			returnLastCard();
-			switchTurn();
-		} else {
-			coreGame.returnCard(cellNumber);
-			game.getListOfCard().get(cellNumber).setSide(coreGame.getCard(cellNumber).side);
-			game.addToCardBuffer(cellNumber);
-			score(getCurrentPlayer());
-		}
+		coreGame.returnCard(cellNumber);
+		game.getListOfCard().get(cellNumber).setSide(coreGame.getCard(cellNumber).side);
+		game.addToCardBuffer(cellNumber);
+		score(getCurrentPlayer());
 		dao.save(game);
 	}
 
 	private void score(int player) {
-		System.out.print("player "+player);
+		System.out.print("player " + player);
 		setPlayerScore(player, getPlayersScore()[player] + 2);
 	}
 
-	private void returnLastCard() {
+	public void returnLastCards() {
 		for (int cardIndex : game.getCardBuffer()) {
 			coreGame.returnCard(cardIndex);
 			game.getListOfCard().get(cardIndex).setSide(coreGame.getCard(cardIndex).side);
 		}
+		switchTurn();
+		dao.save(game);
 	}
 
 	private void switchTurn() {
@@ -93,7 +90,7 @@ public class MemoryAdapter implements MemoryGame {
 
 	@Override
 	public void setPlayerScore(int player, int score) {
-		System.out.println(" set score : "+score);
+		System.out.println(" set score : " + score);
 		coreGame.setPlayerScore(player, score);
 		game.setScore(getPlayersScore());
 	}

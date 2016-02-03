@@ -3,6 +3,7 @@ package edu.isen.jee.memory;
 import java.io.IOException;
 
 import javax.inject.Inject;
+import javax.persistence.criteria.Predicate.BooleanOperator;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,26 +27,37 @@ public class Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String token = getTokenFromRequest(req);
-		
+
 		if (StringUtils.isEmpty(token) || req.getParameter("reset") != null) {
 			game.createNewGame();
 			redirectToGameRoot(req, resp);
 			return;
 		}
 		game.loadFromToken(token);
+
+		String wait = req.getParameter("wait");
+		if(wait!=null){
+			game.returnLastCards();
+			redirectToGameRoot(req, resp);
+			return;
+		}
 		
-		String playCard = req.getParameter("playCard");
+		String playCard = req.getParameter("playCard");		
 		if (playCard != null) {
 			game.play(Integer.parseInt(playCard));
 			redirectToGameRoot(req, resp);
-		} else {
-			resp.setIntHeader("Refresh", 5);
-			req.getRequestDispatcher("/game.jsp").include(req, resp);
+			return;
 		}
+		if (!game.getIfReplay()) {
+			System.out.println("go refresh");
+			resp.setHeader("Refresh", "2;url="+getGameURL(req)+"?wait=true");
+		}
+		
+		req.getRequestDispatcher("/game.jsp").include(req, resp);
 	}
 
 	private void redirectToGameRoot(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.sendRedirect(request.getContextPath() + request.getServletPath() + "/" + game.getToken());
+		response.sendRedirect(getGameURL(request));
 	}
 
 	private String getTokenFromRequest(HttpServletRequest request) {
@@ -56,5 +68,9 @@ public class Servlet extends HttpServlet {
 		String token = request.getRequestURI()
 				.substring(request.getContextPath().length() + request.getServletPath().length() + 1);
 		return token;
+	}
+	
+	private String getGameURL(HttpServletRequest request){
+		return request.getContextPath() + request.getServletPath() + "/" + game.getToken();
 	}
 }
