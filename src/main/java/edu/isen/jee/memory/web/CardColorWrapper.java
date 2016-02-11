@@ -1,6 +1,7 @@
-package edu.isen.jee.memory;
+package edu.isen.jee.memory.web;
 
-import edu.isen.jee.memory.Card.Side;
+import edu.isen.jee.memory.core.Card;
+import edu.isen.jee.memory.core.Card.Side;
 
 public class CardColorWrapper {
 

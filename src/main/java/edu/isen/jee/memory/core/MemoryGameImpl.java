@@ -1,9 +1,10 @@
-package edu.isen.jee.memory;
+package edu.isen.jee.memory.core;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import edu.isen.jee.memory.Card.Side;
+
+import edu.isen.jee.memory.core.Card.Side;
 
 public class MemoryGameImpl implements MemoryGame {
 

@@ -1,11 +1,13 @@
-package edu.isen.jee.memory;
+package edu.isen.jee.memory.core;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import org.apache.commons.lang.math.RandomUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.isen.jee.memory.Card.Side;
+import edu.isen.jee.memory.core.MemoryGame;
+import edu.isen.jee.memory.core.MemoryGameImpl;
+import edu.isen.jee.memory.core.Card.Side;
 
 public class MemoryGameTest {
 

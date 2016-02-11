@@ -1,6 +1,10 @@
-package edu.isen.jee.memory;
+package edu.isen.jee.memory.jpa;
 
 import java.util.List;
+
+import edu.isen.jee.memory.core.Card;
+import edu.isen.jee.memory.core.MemoryGame;
+import edu.isen.jee.memory.core.MemoryGameImpl;
 
 public class MemoryAdapter implements MemoryGame {
 
@@ -33,7 +37,7 @@ public class MemoryAdapter implements MemoryGame {
 	}
 
 	@Override
-	public void returnCard(int cellNumber) throws GameException {
+	public void returnCard(int cellNumber) {
 		coreGame.returnCard(cellNumber);
 		game.getListOfCard().get(cellNumber).setSide(coreGame.getCard(cellNumber).side);
 		game.addToCardBuffer(cellNumber);

@@ -1,4 +1,4 @@
-package edu.isen.jee.memory.guice;
+package edu.isen.jee.memory.jpa.guice;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;

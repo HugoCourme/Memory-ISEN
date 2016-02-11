@@ -1,4 +1,4 @@
-package edu.isen.jee.memory;
+package edu.isen.jee.memory.core;
 
 public class GameException extends RuntimeException {
 	private final String message;

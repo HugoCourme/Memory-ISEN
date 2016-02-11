@@ -1,5 +1,5 @@
 
-package edu.isen.jee.memory;
+package edu.isen.jee.memory.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import edu.isen.jee.memory.Card.Side;
+import edu.isen.jee.memory.core.Card.Side;
 
 @Entity
 public class CardEntity {

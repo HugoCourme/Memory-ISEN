@@ -1,4 +1,4 @@
-package edu.isen.jee.memory;
+package edu.isen.jee.memory.web;
 
 import java.io.IOException;
 

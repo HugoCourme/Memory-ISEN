@@ -1,8 +1,11 @@
-package edu.isen.jee.memory;
+package edu.isen.jee.memory.jpa;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import edu.isen.jee.memory.guice.*;
+import edu.isen.jee.memory.core.Card;
+import edu.isen.jee.memory.jpa.MemoryAdapter;
+import edu.isen.jee.memory.jpa.MemoryDAO;
+import edu.isen.jee.memory.jpa.guice.*;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;

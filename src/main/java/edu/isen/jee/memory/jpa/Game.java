@@ -1,4 +1,4 @@
-package edu.isen.jee.memory;
+package edu.isen.jee.memory.jpa;
 
 import java.util.ArrayList;
 import java.util.List;

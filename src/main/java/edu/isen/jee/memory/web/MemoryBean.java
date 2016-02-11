@@ -1,4 +1,4 @@
-package edu.isen.jee.memory;
+package edu.isen.jee.memory.web;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,6 +7,11 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import edu.isen.jee.memory.core.Card;
+import edu.isen.jee.memory.core.MemoryGame;
+import edu.isen.jee.memory.jpa.MemoryAdapter;
+import edu.isen.jee.memory.jpa.MemoryDAO;
 
 @Named("game")
 @RequestScoped
