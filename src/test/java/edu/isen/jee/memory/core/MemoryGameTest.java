@@ -33,10 +33,10 @@ public class MemoryGameTest {
     @Test
     public void theGameCanBeFinish() throws Exception {
     	for (int i = 0; i < game.getNumberOfCard(); i++) {
-        	assertThat(game.isFinish()).isEqualTo(false);
+        	assertThat(game.isFinished()).isEqualTo(false);
 			game.returnCard(i);
 		}
-    	assertThat(game.isFinish()).isEqualTo(true);
+    	assertThat(game.isFinished()).isEqualTo(true);
     }
     
     @Test

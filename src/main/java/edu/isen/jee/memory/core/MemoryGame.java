@@ -18,7 +18,7 @@ public interface MemoryGame {
 
 	boolean canReplay();
 
-	boolean isFinish();
+	boolean isFinished();
 
 	List<Card> getBoard();
 }

@@ -50,7 +50,7 @@ public class Servlet extends HttpServlet {
 		}
 		if (!game.getIfReplay()) {
 			System.out.println("go refresh");
-			resp.setHeader("Refresh", "2;url="+getGameURL(req)+"?wait=true");
+			resp.setHeader("Refresh", "1;url="+getGameURL(req)+"?wait=true");
 		}
 		
 		req.getRequestDispatcher("/game.jsp").include(req, resp);

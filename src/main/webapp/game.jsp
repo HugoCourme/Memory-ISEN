@@ -23,6 +23,16 @@
             <div class="introduction">
                 <p>Simple memory app that makes use of JEE servlets</p>
             </div>
+            <c:if test="${game.isFinished}">
+              <c:choose>
+              	<c:when test="${game.playersScore[0]==game.playersScore[1]}">
+              		<div id="winner" class="massive circular ui icon orange button">Draw</div>
+              	</c:when> 
+              	<c:otherwise>	
+              		<div id="winner" class="massive circular ui icon green button">Player ${game.playersScore[0]>game.playersScore[1]?"1":"2"}  is the winner</div>
+              	</c:otherwise>
+              </c:choose>
+            </c:if>
         </div>
     </div>
 

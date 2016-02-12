@@ -79,8 +79,8 @@ public class MemoryAdapter implements MemoryGame {
 	}
 
 	@Override
-	public boolean isFinish() {
-		return coreGame.isFinish();
+	public boolean isFinished() {
+		return coreGame.isFinished();
 	}
 
 	@Override

@@ -46,7 +46,7 @@ public class MemoryGameImpl implements MemoryGame {
 	}
 
 	@Override
-	public boolean isFinish() {
+	public boolean isFinished() {
 		 return board.stream().filter(card -> card.side==Side.RECTO).count()==CARD_NUMBER;
 	}
 

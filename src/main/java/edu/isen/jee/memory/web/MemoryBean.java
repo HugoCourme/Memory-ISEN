@@ -68,4 +68,8 @@ public class MemoryBean implements Serializable {
 	public void loadFromToken(String token) {
 		game = dao.loadFromToken(token);
 	}
+	
+	public boolean getIsFinished(){
+		return game.isFinished();
+	}
 }
